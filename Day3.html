@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Code</title>
+</head>
+<body>
+    <script>
+        const callbackfunc = setTimeout(function(){
+            console.log("I will be called when call stack is empty. I exist in task queue meanwhile.")
+        }, 1000)
+
+        requestAnimationFrame(()=>{
+            console.log("for animation purposes, I an used instead of using timeout. Event loop calls me accoridng to the display frequency of the screen. One round of event loop that is execution of items in call stack takes place before I am called.");
+        })
+
+
+        console.log(a); // can accesss before init bcz of hoisting
+        var a = "rameen";
+        let b = "";
+        b = "amir" // can be redeclared
+        console.log(b);
+        const name = a+ " " +b; // can't be redeclared
+        console.log(name);
+
+        const func1 = function curry(a){
+
+            console.log("func1 is closure having a,this statement and curry2");
+            return function curry2(b){
+                console.log("demonstrating concept of closure");
+                console.log(a,b);
+            }
+
+        } 
+        console.log("implementing curry functions");
+        let d = func1(a);
+        d(b);
+
+        
+
+    </script>
+</body>
+</html>
