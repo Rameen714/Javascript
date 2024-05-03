@@ -7,9 +7,61 @@
 </head>
 <body>
     <script>
-      console.log("Today we will demonstrate conecpt of call back hell and how using call backs causes inversion of control")
+      console.log("Demonstrating conecpt of call back hell and how using call backs causes inversion of control")
       
-        
+      function createOrder(items, callback) {
+        console.log("Creating order with items:", items);
+        setTimeout(() => {
+            const orderId = 1; // Simulating order creation
+            callback(orderId);
+        }, 1000);
+      }
+      function processPayment(orderId, callback) {
+        console.log("Processing payment for order:", orderId);
+        setTimeout(() => {
+            const status = true; // Simulating payment processing
+            callback(status);
+        }, 1000);
+      }
+      function complete(status, callback) {
+        if (status) {
+            console.log("Order completed successfully");
+            callback();
+        }
+      }   
+      //we are passing these callbacks below but we cannot be always certain about their execution so its better to use promises
+      
+      const items = ["shoes", "pants"]
+      
+      createOrder(items, (orderId) => {
+        processPayment(orderId, (status) => {
+            complete(status,() => {
+                console.log(">>>>>>>>>> existing from call back hell");
+            })
+        })
+      })
+      
+      console.log("Call back hell >>>>>>>>>>");
+
+      setTimeout(()=>{
+        UsingPromises();
+      },5000)
+
+      // fetch here returns a promise 
+      // then instead of passing callback we attach a call back to promise response
+      // we attach a call back by using .then
+      
+      //consuming a promsie here
+      function UsingPromises(){
+        console.log("How to use promises:")
+        const gitapi = "https://api.github.com/users/rameen714"
+        const user = fetch(gitapi)
+        user.then((user)=>{
+            console.log(user)
+        })
+      }
+
+
 
     </script>
 </body>

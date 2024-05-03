@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Code</title>
+</head>
+<body>
+    <script>
+      console.log("Demonstrating promise chaining")
+      
+      //producing promise
+      function createOrder(cart){
+        const pr = new Promise(function (resolve,reject){
+            
+            console.log(cart)
+            //const orderId = 12345;
+            let orderId;
+            resolve(orderId);
+        })
+
+        return pr;
+      }
+      function processPayment(orderId){
+        const pr = new Promise(function (resolve,reject){
+            if(orderId)
+            {
+                console.log("Payment successfl for order id:", orderId);
+                resolve("succss");
+            }
+            else
+                reject("not sucessful");
+        })
+
+        return pr;
+      }
+
+      //the concept of promise chaining - attaching multiple callback using then instead of passing callbacks into callbacks
+
+      const cart = ["shoes"];
+      createOrder(cart)
+        .then(function (orderId){
+            return orderId;
+        })
+        .then(function (orderId){
+            return processPayment(orderId);
+        })
+        .catch(function(err){
+            console.log(err)
+            return err;
+        })
+        .then(function(info){
+            console.log(info);
+        })
+      
+      
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Code</title>
+</head>
+<body>
+    <script>
+      console.log("Demonstrating how using async functions automatically returns a promise intead of defining it with new keyword\n")
+      console.log
+      ("Also how we use await with a promise to avoid chaining thens() as await pauses function execution(not javascript engine) while it's executing\n")
+      
+      async function asyncAwait(){
+        const gitapi = "https://api.github.com/users/rameen714"
+        const user = await fetch(gitapi)
+        const userData = await user.json(); // use await must becuase .json is also a promise
+        console.log(userData)
+      }
+      asyncAwait();
+      
+    </script>
+</body>
+</html>
